@@ -197,15 +197,12 @@ export default function PetProfile() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-col sm:flex-row items-start gap-6">
-                    {pet.owner.photoUrl && (
-                      <Image
-                        src={pet.owner.photoUrl}
-                        alt={pet.owner.name}
-                        width={100}
-                        height={100}
-                        className="rounded-full border-4 border-primary object-cover"
-                      />
-                    )}
+                    <Avatar className="w-24 h-24 border-4 border-primary">
+                      <AvatarImage src={pet.owner.photoUrl} alt={pet.owner.name} />
+                      <AvatarFallback className="bg-secondary font-serif text-2xl">
+                        {pet.owner.name.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
                     <div className="space-y-3 flex-1 w-full">
                       <div>
                         <p className="font-mono text-xs uppercase text-muted-foreground">Name</p>
