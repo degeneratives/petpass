@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow authenticated users to read/write their own pets
+    match /pets/{petId} {
+      // Anyone can read public pets (for QR code sharing)
+      allow read: if resource.data.privacy == 'public';
+
+      // Authenticated users can read their own pets (any privacy level)
+      allow read: if request.auth != null && resource.data.ownerId == request.auth.uid;
+
+      // Authenticated users can create pets
+      allow create: if request.auth != null && request.resource.data.ownerId == request.auth.uid;
+
+      // Authenticated users can update their own pets
+      allow update: if request.auth != null && resource.data.ownerId == request.auth.uid;
+
+      // Authenticated users can delete their own pets
+      allow delete: if request.auth != null && resource.data.ownerId == request.auth.uid;
+    }
+  }
+}

@@ -63,7 +63,7 @@ export default function PublicPetProfile() {
               <p className="text-muted-foreground font-sans">
                 This pet profile is private or doesn't exist.
               </p>
-              <Link href="/">
+              <Link href={`/?returnTo=${petId}`}>
                 <Button className="bg-primary hover:bg-primary/90 font-mono uppercase mt-4">
                   Create Your Pet Profile
                 </Button>
@@ -86,7 +86,7 @@ export default function PublicPetProfile() {
               Digital Pet Identity
             </p>
           </div>
-          <Link href="/">
+          <Link href={`/?returnTo=${petId}`}>
             <Button className="bg-primary hover:bg-primary/90 font-mono uppercase">
               Create Yours
             </Button>
@@ -167,7 +167,7 @@ export default function PublicPetProfile() {
                 <p className="text-muted-foreground font-sans max-w-md mx-auto">
                   Sign up to view full health records, vaccination history, veterinary contacts, travel documents, and more!
                 </p>
-                <Link href="/">
+                <Link href={`/?returnTo=${petId}`}>
                   <Button className="bg-primary hover:bg-primary/90 font-mono uppercase shadow-[4px_4px_0px_0px_rgba(0,109,119,1)]">
                     Sign Up Free →
                   </Button>
@@ -235,7 +235,7 @@ export default function PublicPetProfile() {
                 <p className="font-mono text-xs uppercase">Cloud Synced</p>
               </div>
             </div>
-            <Link href="/">
+            <Link href={`/?returnTo=${petId}`}>
               <Button className="bg-primary hover:bg-primary/90 font-mono uppercase text-lg px-8 py-6 shadow-[6px_6px_0px_0px_rgba(0,109,119,1)]">
                 Get Started Free
               </Button>

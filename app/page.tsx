@@ -5,12 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function Home() {
+function HomeContent() {
   const { user, signIn, signUp, signInWithGoogle, signInWithApple, loading } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnTo = searchParams.get('returnTo');
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,9 +20,11 @@ export default function Home() {
 
   useEffect(() => {
     if (!loading && user) {
-      router.push('/dashboard');
+      // If user came from a pet profile, redirect there; otherwise go to dashboard
+      const destination = returnTo ? `/pets/${returnTo}` : '/dashboard';
+      router.push(destination);
     }
-  }, [user, loading, router]);
+  }, [user, loading, router, returnTo]);
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +35,8 @@ export default function Home() {
       } else {
         await signIn(email, password);
       }
-      router.push('/dashboard');
+      const destination = returnTo ? `/pets/${returnTo}` : '/dashboard';
+      router.push(destination);
     } catch (err: unknown) {
       setError((err as Error).message || 'Authentication failed');
     }
@@ -40,7 +45,8 @@ export default function Home() {
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      router.push('/dashboard');
+      const destination = returnTo ? `/pets/${returnTo}` : '/dashboard';
+      router.push(destination);
     } catch (err: unknown) {
       setError((err as Error).message || 'Google sign-in failed');
     }
@@ -49,7 +55,8 @@ export default function Home() {
   const handleAppleSignIn = async () => {
     try {
       await signInWithApple();
-      router.push('/dashboard');
+      const destination = returnTo ? `/pets/${returnTo}` : '/dashboard';
+      router.push(destination);
     } catch (err: unknown) {
       setError((err as Error).message || 'Apple sign-in failed');
     }
@@ -211,5 +218,17 @@ export default function Home() {
       </div>
     </div>
     </>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <p className="font-mono text-primary">Loading...</p>
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
   );
 }
