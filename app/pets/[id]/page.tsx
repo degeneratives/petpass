@@ -65,7 +65,7 @@ export default function PetProfile() {
     return null;
   }
 
-  const petUrl = `${window.location.origin}/pets/${petId}`;
+  const petUrl = `${window.location.origin}/p/${petId}`;
   const age = pet.profile.dob ? Math.floor((new Date().getTime() - new Date(pet.profile.dob).getTime()) / (1000 * 60 * 60 * 24 * 365)) : 0;
 
   return (

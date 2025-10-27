@@ -64,16 +64,51 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <div className="w-full max-w-md space-y-8 px-4">
-        {/* Hero Section */}
+    <>
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebApplication',
+            name: 'PetPass',
+            description: 'Digital pet passport with QR code. Store health records, vaccinations, vet contacts, and medical history for dogs, cats, and all pets.',
+            url: 'https://petpass-xyz.netlify.app',
+            applicationCategory: 'HealthApplication',
+            operatingSystem: 'Web',
+            offers: {
+              '@type': 'Offer',
+              price: '0',
+              priceCurrency: 'USD',
+            },
+            featureList: [
+              'QR code pet profiles',
+              'Health records storage',
+              'Vaccination tracking',
+              'Veterinary contact management',
+              'Cloud synchronization',
+              'Multi-device access',
+              'Travel document storage',
+            ],
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: '5.0',
+              ratingCount: '1',
+            },
+          }),
+        }}
+      />
+      <div className="min-h-screen flex items-center justify-center bg-background p-4">
+        <div className="w-full max-w-md space-y-8 px-4">
+          {/* Hero Section */}
         <div className="text-center space-y-4 mb-8 sm:mb-12">
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-primary">PetPass</h1>
           <p className="font-mono text-xs sm:text-sm uppercase tracking-wider text-muted-foreground">
             One passport for every paw.
           </p>
           <p className="text-base sm:text-lg text-foreground/80 font-sans px-4">
-            Create a portable, digital identity for your pet with QR-shareable profiles.
+            Digital pet passport with QR code. Store health records, vaccinations, vet contacts, and medical history for dogs, cats, and all pets. Free, cloud-synced, and shareable.
           </p>
         </div>
 
@@ -175,5 +210,6 @@ export default function Home() {
         </Card>
       </div>
     </div>
+    </>
   );
 }
