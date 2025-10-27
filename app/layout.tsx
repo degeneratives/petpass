@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Libre_Baskerville, Space_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "@/contexts/DemoAuthContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const libreBaskerville = Libre_Baskerville({
   weight: ["400", "700"],

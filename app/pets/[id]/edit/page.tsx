@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuth } from '@/contexts/DemoAuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { localStorageDB } from '@/lib/localStorage';
