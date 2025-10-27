@@ -174,7 +174,9 @@ export default function NewPet() {
     setSaving(true);
     setSaveAndAddAnother(addAnother);
     try {
+      const petId = `${user.uid}_${Date.now()}`;
       const petData = {
+        petId,
         ownerId: user.uid,
         owner: {
           name: ownerName,
