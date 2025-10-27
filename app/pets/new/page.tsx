@@ -3,7 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { localStorageDB } from '@/lib/localStorage';
+import { createPet } from '@/lib/firestore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -228,11 +228,9 @@ export default function NewPet() {
           travelHistory: travelHistory.split(',').map(t => t.trim()).filter(Boolean),
         },
         privacy,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       };
 
-      const newPet = localStorageDB.addPet(petData);
+      const newPet = await createPet(petData);
 
       if (addAnother) {
         // Reset form but keep owner info

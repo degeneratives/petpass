@@ -3,7 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { localStorageDB } from '@/lib/localStorage';
+import { getPetsByOwner } from '@/lib/firestore';
 import { Pet } from '@/types/pet';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -32,7 +32,7 @@ export default function Dashboard() {
   const fetchPets = async () => {
     if (!user) return;
     try {
-      const petsData = localStorageDB.getPetsByOwner(user.uid);
+      const petsData = await getPetsByOwner(user.uid);
       setPets(petsData);
     } catch (error) {
       console.error('Error fetching pets:', error);

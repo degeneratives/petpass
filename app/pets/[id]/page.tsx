@@ -3,7 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { localStorageDB } from '@/lib/localStorage';
+import { getPetById } from '@/lib/firestore';
 import { Pet } from '@/types/pet';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -39,7 +39,7 @@ export default function PetProfile() {
 
   const fetchPet = async () => {
     try {
-      const petData = localStorageDB.getPetById(petId);
+      const petData = await getPetById(petId);
       if (petData) {
         setPet(petData);
       } else {

@@ -3,7 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { localStorageDB } from '@/lib/localStorage';
+import { getPetById, updatePet } from '@/lib/firestore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -88,8 +88,8 @@ export default function EditPet() {
     }
   }, [petId]);
 
-  const loadPetData = () => {
-    const pet = localStorageDB.getPetById(petId);
+  const loadPetData = async () => {
+    const pet = await getPetById(petId);
     if (!pet) {
       alert('Pet not found');
       router.push('/dashboard');
@@ -296,7 +296,7 @@ export default function EditPet() {
         privacy,
       };
 
-      localStorageDB.updatePet(petId, updatedData);
+      await updatePet(petId, updatedData);
       router.push(`/pets/${petId}`);
     } catch (error) {
       console.error('Error updating pet:', error);
