@@ -122,41 +122,47 @@ export default function Dashboard() {
           </Card>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pets.map((pet) => (
-              <Link key={pet.petId} href={`/pets/${pet.petId}`}>
-                <Card className="border-2 border-primary hover:shadow-[8px_8px_0px_0px_rgba(0,109,119,1)] transition-all cursor-pointer">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <Avatar className="w-20 h-20 border-2 border-primary">
-                        <AvatarImage src={pet.profile.photoUrl} alt={pet.profile.name} />
-                        <AvatarFallback className="bg-secondary font-serif text-2xl">
-                          {pet.profile.name.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <Badge
-                        variant={pet.privacy === 'public' ? 'default' : 'secondary'}
-                        className="font-mono text-xs"
-                      >
-                        {pet.privacy}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <CardTitle className="font-serif text-2xl text-primary mb-2">
-                      {pet.profile.name}
-                    </CardTitle>
-                    <div className="space-y-1">
-                      <p className="font-mono text-xs uppercase text-muted-foreground">
-                        {pet.profile.species} • {pet.profile.breed}
-                      </p>
-                      <p className="font-sans text-sm text-foreground/80">
-                        {pet.profile.color}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+            {pets.map((pet, index) => {
+              const colors = ['from-[#83C5BE]/20 to-[#E0F2F4]/20', 'from-[#B2DFE3]/20 to-[#FEC5E5]/20', 'from-[#FEE1A5]/20 to-[#D4BAFF]/20'];
+              const badgeColors = ['bg-[#83C5BE]', 'bg-[#FEC5E5]', 'bg-[#FEE1A5]'];
+              const gradientClass = colors[index % colors.length];
+              const badgeClass = badgeColors[index % badgeColors.length];
+
+              return (
+                <Link key={pet.petId} href={`/pets/${pet.petId}`}>
+                  <Card className={`group border-0 bg-gradient-to-br ${gradientClass} backdrop-blur-sm hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer overflow-hidden`}>
+                    <CardHeader className="pb-4">
+                      <div className="flex items-start justify-between">
+                        <Avatar className="w-24 h-24 border-4 border-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <AvatarImage src={pet.profile.photoUrl} alt={pet.profile.name} />
+                          <AvatarFallback className="bg-white font-serif text-3xl text-primary">
+                            {pet.profile.name.charAt(0)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <Badge
+                          className={`${pet.privacy === 'public' ? 'bg-[#83C5BE]' : badgeClass} text-white font-mono text-xs border-0 px-3 py-1`}
+                        >
+                          {pet.privacy}
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <CardTitle className="font-serif text-3xl text-primary mb-2 group-hover:text-[#006D77] transition-colors">
+                        {pet.profile.name}
+                      </CardTitle>
+                      <div className="space-y-2">
+                        <p className="font-mono text-sm uppercase text-muted-foreground font-bold">
+                          {pet.profile.species} • {pet.profile.breed}
+                        </p>
+                        <p className="font-sans text-base text-foreground/90 bg-white/50 inline-block px-3 py-1 rounded-full">
+                          {pet.profile.color}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         )}
       </main>

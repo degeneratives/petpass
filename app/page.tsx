@@ -120,12 +120,12 @@ function HomeContent() {
         </div>
 
         {/* Auth Card */}
-        <Card className="border-2 border-primary shadow-[8px_8px_0px_0px_rgba(0,109,119,1)]">
-          <CardHeader>
-            <CardTitle className="font-serif text-2xl text-primary">
+        <Card className="border-0 shadow-2xl bg-gradient-to-br from-white to-[#E0F2F4]/30 backdrop-blur-sm">
+          <CardHeader className="pb-6">
+            <CardTitle className="font-serif text-3xl text-primary">
               {isSignUp ? 'Create Account' : 'Welcome Back'}
             </CardTitle>
-            <CardDescription className="font-mono text-xs uppercase">
+            <CardDescription className="font-mono text-sm uppercase font-semibold text-muted-foreground">
               {isSignUp ? 'Sign up to get started' : 'Sign in to your account'}
             </CardDescription>
           </CardHeader>
@@ -163,7 +163,7 @@ function HomeContent() {
               )}
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90 font-mono uppercase tracking-wider"
+                className="w-full bg-gradient-to-r from-[#006D77] to-[#83C5BE] hover:from-[#006D77]/90 hover:to-[#83C5BE]/90 text-white font-mono uppercase tracking-wider shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 {isSignUp ? 'Sign Up' : 'Sign In'} →
               </Button>
@@ -187,17 +187,17 @@ function HomeContent() {
                 type="button"
                 variant="outline"
                 onClick={handleGoogleSignIn}
-                className="border-2 border-primary font-mono text-xs sm:text-sm"
+                className="border-2 border-[#83C5BE] hover:bg-[#83C5BE]/10 font-mono text-xs sm:text-sm transition-colors duration-300"
               >
-                Google
+                🔍 Google
               </Button>
               <Button
                 type="button"
                 variant="outline"
                 onClick={handleAppleSignIn}
-                className="border-2 border-primary font-mono text-xs sm:text-sm"
+                className="border-2 border-[#83C5BE] hover:bg-[#83C5BE]/10 font-mono text-xs sm:text-sm transition-colors duration-300"
               >
-                Apple
+                🍎 Apple
               </Button>
             </div>
 
