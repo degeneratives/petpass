@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import { ThemeToggle } from '@/components/theme-toggle';
 import Link from 'next/link';
 
 export default function Dashboard() {
@@ -65,15 +66,16 @@ export default function Dashboard() {
               Dashboard
             </p>
           </div>
-          <div className="flex items-center gap-4 w-full sm:w-auto">
+          <div className="flex items-center gap-3 w-full sm:w-auto">
             <div className="text-left sm:text-right flex-1 sm:flex-none">
               <p className="font-mono text-xs uppercase text-muted-foreground">User</p>
               <p className="text-sm font-sans truncate max-w-[200px]">{user.email}</p>
             </div>
+            <ThemeToggle />
             <Button
               onClick={handleLogout}
               variant="outline"
-              className="border-2 border-primary font-mono whitespace-nowrap"
+              className="border-2 border-primary font-mono whitespace-nowrap hover:bg-primary/10"
             >
               Logout
             </Button>
